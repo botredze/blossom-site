@@ -1,0 +1,113 @@
+.sendData {
+  h5 {
+    color: #c14e77;
+    font-family: "EB Garamond", serif;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 0 20px;
+  }
+
+  form {
+    input {
+      height: 55px;
+      width: 450px;
+      border: 1px solid #e8e8e8;
+      padding: 0 20px;
+    }
+
+    @media screen and (max-width: 750px) {
+      input {
+        width: 100%;
+        align-items: center;
+        padding: 0 20px;
+      }
+    }
+
+
+    b {
+      display: block;
+      margin: 20px 0 5px 0;
+      color: #414141;
+      font-size: 16px;
+    }
+
+    .data {
+      display: flex;
+      // justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+
+      @media screen and (max-width: 750px) {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        align-items: center;
+        margin: 0 auto;
+
+        label {
+          width: 100%;
+        }
+
+        input {
+          width: 100%;
+        }
+      }
+
+    }
+
+    .types {
+      display: flex;
+      justify-content: space-between;
+
+      .choice {
+        width: 450px;
+
+        &__inner {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          margin: 0 0 15px 0;
+          cursor: pointer;
+
+          > div {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: solid 1px #e9e9e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            > img {
+              width: 50%;
+              height: 50%;
+            }
+          }
+        }
+      }
+    }
+
+    button {
+      display: block;
+      width: 450px;
+      min-height: 65px;
+      color: #fff;
+      line-height: 20px;
+      text-transform: uppercase;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #c14e77;
+      border-radius: 5px;
+      margin: 20px 0 0 0;
+
+      @media screen and (max-width: 600px) {
+        width: 90%;
+        margin: 20px auto;
+        z-index: 10;
+      }
+    }
+  }
+
+}

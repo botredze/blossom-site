@@ -1,0 +1,215 @@
+.everyCard {
+  width: 265px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 478px;
+  position: relative;
+  background: transparent;
+  @media screen and (max-width: 600px ){
+    position: static;
+    height: 498px;
+  }
+
+  @media screen and (max-width: 860px ){
+    width: 48%;
+    max-width: 265px;
+  }
+
+  @media screen and (max-width: 480px ){
+    width: 48%;
+    min-width: 120px;
+    height: 498px;
+  }
+
+  .imgs {
+    position: relative;
+    .mainImg {
+      width: 100%;
+      height: 298px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .heart {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+
+      > div {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: transparent;
+        > img {
+          width: 60%;
+          height: 60%;
+          // box-shadow: 10px 10px 20px rgba(70, 69, 69, 0.5);
+        }
+      }
+    }
+  }
+  .info {
+    background: #f7f0eb;
+    padding: 13px 15px;
+    text-align: left;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .moreInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      h3 {
+        color: #414141;
+        font-size: 20px;
+        line-height: 20px;
+        font-family: "EB Garamond", serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+        overflow-y: hidden; /* Скрытие вертикального скроллбара, текст выходит за границы */
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Количество отображаемых строк текста */
+        -webkit-box-orient: vertical;
+      }
+      .rating {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      span {
+        display: block;
+        font-size: 14px;
+        color: #c14e77;
+        line-height: 30px;
+        // padding: 10px 0 20px 0;
+      }
+      p {
+        color: #414141;
+        font-size: 23px;
+        line-height: normal;
+        padding: 5px 0 15px 0;
+      }
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3px;
+      > button {
+        width: 50%;
+        cursor: pointer;
+        height: 35px;
+        color: #fff;
+        font-size: 12px;
+        line-height: 20px;
+        border: solid 1px #c14e77;
+        background: #c14e77;
+        border-radius: 5px;
+        transition: all 200ms ease 0ms;
+        padding: 0;
+        padding: 0 5px;
+        &:hover {
+          background: transparent;
+          color: #c14e77;
+        }
+      }
+      > button:nth-child(2) {
+        background: transparent;
+        color: #c14e77;
+        &:hover {
+          border: solid 1px #c14e77;
+          background: #c14e77;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 860px ){
+    .info.actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > button {
+        cursor: pointer;
+        height: 37px ;
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+        border: solid 1px #c14e77;
+        background: #c14e77;
+        border-radius: 5px;
+        transition: all 200ms ease 0ms;
+        padding: 0;
+        padding: 0 15px;
+        &:hover {
+          background: transparent;
+          color: #c14e77;
+        }
+      }
+      > button:nth-child(2) {
+        background: transparent;
+        color: #c14e77;
+        &:hover {
+          border: solid 1px #c14e77;
+          background: #c14e77;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px ){
+    info.actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 131px;
+      > button {
+        max-width: 95px;
+        height: 37px ;
+        cursor: pointer;
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+        border: solid 1px #c14e77;
+        background: #c14e77;
+        border-radius: 5px;
+        transition: all 200ms ease 0ms;
+        padding: 0;
+        padding: 0 15px;
+        &:hover {
+          background: transparent;
+          color: #c14e77;
+        }
+      }
+      > button:nth-child(2) {
+        background: transparent;
+        color: #c14e77;
+        &:hover {
+          border: solid 1px #c14e77;
+          background: #c14e77;
+          color: #fff;
+        }
+      }
+    }
+
+    .info {
+      background: #f7f0eb;
+      padding: 5px 8px;
+      text-align: left;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+}

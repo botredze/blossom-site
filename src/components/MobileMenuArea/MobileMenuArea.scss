@@ -1,0 +1,22 @@
+.menu-area {
+
+  &__inner {
+    padding: 10px 5px;
+    height: 100%;
+
+    .category {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 20px;
+
+      li {
+        color: #090909;
+        cursor: pointer;
+        position: relative;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+}

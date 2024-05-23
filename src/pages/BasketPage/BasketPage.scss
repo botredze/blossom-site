@@ -1,0 +1,182 @@
+.basketPage {
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+
+    @media screen and (max-width: 950px ){
+      flex-direction: column !important;
+      gap: 15px
+    }
+
+    .basketMain {
+      // border-bottom: 1px solid #ebedea;
+      padding: 0 0 30px 0;
+      width: 100%;
+      .line {
+        border-bottom: 1px solid #ebedea;
+        margin: 20px 0 0px 0;
+      }
+      .everyBasket {
+        border-bottom: 1px solid #ebedea;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0px;
+        &__inner {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          max-width: 100%;
+          .imgBasket {
+            min-width: 98px;
+            height: 117px;
+            max-width: 98px;
+          }
+          .textsBasket {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            h4 {
+              font-size: 20px;
+              color: #414141;
+              font-family: "Roboto", sans-serif;
+            }
+            p {
+              font-size: 14px;
+              color: #414141;
+              font-family: "Roboto", sans-serif;
+              max-width: 400px;
+
+            }
+            span {
+              font-size: 23px;
+              font-family: "Roboto", sans-serif;
+            }
+          }
+        }
+        .actionsCounter {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+          .counter {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 31px;
+            background: #f9f9f9;
+            box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.07);
+            border-radius: 5px;
+            width: 106px;
+            height: 30px;
+            > button {
+              color: #c14e77;
+              font-size: 20px;
+              background: transparent;
+            }
+            > button:first-child {
+              font-size: 35px;
+            }
+          }
+          .deleteFlow {
+            border: 1px solid #c14e77;
+            background: transparent;
+            color: #414141;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+              transform: scale(1.05);
+            }
+            > img {
+              width: 40%;
+              height: 40%;
+            }
+          }
+        }
+      }
+
+    }
+    .basketSum {
+      min-width: 336px;
+      margin: 10px;
+      position: sticky;
+      right: 0;
+      top: 200px;
+      height: 250px;
+      > div {
+        background: #f7f0eb;
+        padding: 12px 20px;
+        margin: 0 0 15px 0;
+        border-radius: 5px;
+        span {
+          font-size: 18px;
+          color: #7c7c7c;
+          font-family: "Roboto", sans-serif;
+          line-height: normal;
+          font-weight: 400;
+        }
+        > div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          p {
+            line-height: 25px;
+          }
+        }
+      }
+      button {
+        width: 100%;
+        min-height: 65px;
+        color: #fff;
+        line-height: 20px;
+        text-transform: uppercase;
+        align-items: center;
+        padding: 10px 20px;
+        font-size: 15px;
+        background: #c14e77;
+        border-radius: 5px;
+      }
+
+      @media screen and (max-width: 780px ){
+        width: 95%;
+        margin: 0 auto;
+        button{
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  @media screen and (max-width: 770px ){
+    .title ::before{
+      display: none;
+    }
+    .basketMain {
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+
+    }
+
+    .everyBasket {
+      flex-direction: column;
+    }
+
+      &__inner {
+        flex-direction: row;
+
+        .textsBasket{
+          flex-direction: column;
+          overflow: auto;
+          width: 100%;
+        }
+    }
+  }
+
+}

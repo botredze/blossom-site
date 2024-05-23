@@ -1,0 +1,20 @@
+.favotitePage {
+  min-height: 60vh;
+  &__inner {
+    border: 1px solid #ebedea;
+    padding: 0 8px;
+    border-radius: 8px;
+    margin: 40px 0 100px;
+    .noneBlock {
+      background: #fcf6f1;
+      color: #414141;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 100px 0;
+      padding: 35px 20px;
+    }
+    .list {
+      justify-content: flex-start;
+    }
+  }
+}

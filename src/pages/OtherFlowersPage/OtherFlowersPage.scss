@@ -1,0 +1,8 @@
+.moreSort {
+  justify-content: flex-end !important;
+
+  @media screen and (max-width: 600px ){
+    padding-top: 15px;
+    justify-content: flex-start !important;
+  }
+}

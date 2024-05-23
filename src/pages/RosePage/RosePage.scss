@@ -1,0 +1,73 @@
+.rosePage {
+  &__inner {
+    h4 {
+      font-size: 30px;
+      color: #414141;
+      line-height: normal;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+    }
+    .categoryTypeMore {
+      display: flex;
+      justify-content: flex-start;
+      gap: 40px;
+      margin: 0 0 40px 0;
+      @media screen and (max-width: 600px ){
+        gap: 20px;
+      }
+      > li {
+        width: 150px;
+        @media screen and (max-width: 600px ){
+          gap: 100px;
+        }
+      }
+    }
+    .sortPrice {
+      display: flex;
+      justify-content: space-between;
+
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        h4 {
+          font-size: 20px;
+          font-weight: 500;
+          font-family: 'Roboto', sans-serif;
+          @media screen and (max-width: 600px ){
+            font-size: 15px;
+            font-weight: 400;
+            color: #bebebe;
+          }
+        }
+
+        button:nth-child(2),
+        button:last-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: transparent;
+
+          p {
+            color: #414141;
+            margin: 0 5px 0 0;
+          }
+
+          img {
+            width: 15px;
+            height: 15px;
+          }
+
+          &:nth-child(2) img {
+            transform: rotate(90deg);
+          }
+
+          &:last-child img {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+
+.navigate{
+  margin: 0 auto;
+  padding: 0 10px;
+  background: #ffffff;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  display: none;
+
+  @media screen and (max-width: 500px ){
+    display: block;
+    padding: 0;
+    margin: auto;
+    z-index: 99;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+    align-self: center;
+    gap: 0px;
+    margin: 0 auto;
+  }
+}

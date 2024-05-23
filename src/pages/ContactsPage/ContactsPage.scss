@@ -1,0 +1,57 @@
+.contactsPage {
+  &__inner {
+
+    .infoContact {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px 0px;
+      @media screen and (max-width: 810px ){
+        flex-direction: column;
+      }
+
+      .map {
+        width: 600px;
+        height: 450px;
+
+        @media screen and (max-width: 600px ){
+          width: 450px;
+          height: 300px;
+        }
+
+        @media screen and (max-width: 457px ){
+          width: 400px;
+          height: 250px;
+        }
+
+        @media screen and (max-width: 400px ){
+          width: 350px;
+          height: 200px;
+        }
+      }
+      .mapText {
+        width: 500px;
+
+        @media screen and (max-width: 520px ){
+         max-width: 100% ;
+        }
+        p {
+          color: #e2a178;
+          line-height: 1.35;
+          font-weight: 600;
+          font-size: 16px;
+          font-family: 'Playfair Display', serif;
+        }
+        span {
+          display: block;
+          color: #414141;
+          line-height: 1.35;
+          font-weight: 600;
+          font-size: 25px;
+          font-family: 'Roboto', sans-serif;
+          margin: 5px 0 10px 0;
+        }
+      }
+    }
+  }
+}

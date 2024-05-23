@@ -1,0 +1,123 @@
+.detailedPage {
+  &__inner {
+    padding: 30px 0px;
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #ebedea;
+    .mainImgflowers {
+      min-width: 360px;
+      height: 440px;
+      > img {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+    }
+    .mainContent {
+      width: 100%;
+      h5 {
+        font-size: 30px;
+        color: #414141;
+        font-weight: 700;
+        // font-family: 'Roboto', sans-serif;
+        font-family: "Playfair Display", serif;
+        ///  font-family: "EB Garamond", serif;
+      }
+      .star {
+        width: auto;
+        height: 30px;
+        margin: 20px 0px 20px -7px;
+        justify-content: flex-start;
+        img {
+          width: 14px;
+          height: 14px;
+          margin: 0 5px;
+        }
+        b {
+          font-size: 16px;
+          line-height: 17px;
+          margin: 0 0 0 5px;
+        }
+      }
+      .priceflowers {
+        display: flex;
+        align-items: center;
+        // background: red;
+        width: 100%;
+        p {
+          color: #414141;
+          font-size: 22px;
+          font-family: "Roboto", sans-serif;
+          padding: 0 0 26px 0;
+        }
+        span {
+          display: block;
+          color: #e8b493;
+          font-size: 31px;
+          font-family: "Roboto", sans-serif;
+          padding: 0 0 26px 8px;
+        }
+      }
+      .sostav {
+        // background: red;
+        min-width: 100%;
+        height: 20px;
+        padding: 41px 0px;
+        border-top: 1px solid #ebedea;
+        display: flex;
+        align-items: center;
+        p {
+          font-size: 17px;
+          font-weight: 600;
+          color: #222;
+        }
+        span {
+          line-height: 17px;
+          display: block;
+          font-size: 17px;
+          font-weight: 400;
+          margin: 0 0 0 5px;
+        }
+      }
+      .actionsBtn {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        position: relative;
+        > button {
+          cursor: pointer;
+          height: 55px;
+          color: #fff;
+          font-size: 16px;
+          line-height: 20px;
+          border: solid 1px #c14e77;
+          background: #c14e77;
+          border-radius: 5px;
+          transition: all 200ms ease 0ms;
+          //   padding: 0 35px;
+          width: 300px;
+          &:hover {
+            background: transparent;
+            color: #c14e77;
+          }
+        }
+        > button:nth-child(2) {
+          background: transparent;
+          color: #c14e77;
+          &:hover {
+            border: solid 1px #c14e77;
+            background: #c14e77;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px ){
+    &__inner {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
