@@ -5,7 +5,7 @@ import Alerts from "../components/Alerts/Alerts";
 import MainLayouts from "../layouts/MainLayouts/MainLayouts";
 import CatalogPage from "../pages/CatalogPage/CatalogPage";
 import RosePage from "../pages/RosePage/RosePage";
-import PionsPage from "../pages/PionsPage/PionsPage";
+import Buckets from "../pages/PionsPage/Buckets";
 import OtherFlowersPage from "../pages/OtherFlowersPage/OtherFlowersPage";
 import ContactsPage from "../pages/ContactsPage/ContactsPage";
 import DetailedPage from "../pages/DetailedPage/DetailedPage";
@@ -22,7 +22,7 @@ const MainRoutes = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/rose" element={<RosePage />} />
-          <Route path="/pions" element={<PionsPage />} />
+          <Route path="/bukets" element={<Buckets />} />
           <Route path="/every/:id" element={<DetailedPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/other/:id/:name" element={<OtherFlowersPage />} />

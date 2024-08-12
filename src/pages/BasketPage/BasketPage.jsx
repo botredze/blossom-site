@@ -66,7 +66,7 @@ const BasketPage = () => {
                     <img
                       src={
                         imgParse(flow?.foto)?.path
-                          ? `http://operator.blossom.333.kg/${
+                          ? `https://operator.blossom.333.kg/${
                               imgParse(flow?.foto)?.path
                             }`
                           : noImg

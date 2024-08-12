@@ -23,6 +23,19 @@
     }
   }
 
+  .soc_icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .links {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @media screen and (max-width: 655px) {
     display: none;
   }
@@ -70,7 +83,7 @@
         background: #e6d8cf;
         transition: 0.5s;
       }
-      > img {
+       >img {
         width: 50%;
         height: 50%;
       }

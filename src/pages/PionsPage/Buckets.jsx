@@ -9,7 +9,7 @@ import CallMe from "../../components/CallMe/CallMe";
 import VideoInfo from "../../components/VideoInfo/VideoInfo";
 import MoreInfo from "../../components/MoreInfo/MoreInfo";
 
-const PionsPage = () => {
+const Buckets = () => {
   const dispatch = useDispatch();
   const { listPions } = useSelector((state) => state.requestSlice);
 
@@ -24,10 +24,10 @@ const PionsPage = () => {
         <div className="rosePage__inner">
           <div className="navigateWeb">
             <NavLink to={"/"}>Доставка цветов</NavLink>
-            <span>Пионы</span>
+            <span>Микс букеты</span>
           </div>
           {/* <div className="choiceFlowers"></div> */}
-          <h4>Пионы</h4>
+          <h4>Микс букеты</h4>
           <div className="sortPrice moreSort">
             <div>
               <h4>Сортировка по: </h4>
@@ -61,4 +61,4 @@ const PionsPage = () => {
   );
 };
 
-export default PionsPage;
+export default Buckets;

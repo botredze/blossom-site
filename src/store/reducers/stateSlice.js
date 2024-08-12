@@ -40,13 +40,16 @@ const initialState = {
 
   listCategory: [
     { id: 0, name: "Все", active: true },
-    { id: 10414, name: "Розы", img: roze, active: false },
-    { id: 10416, name: "Пионы", active: false },
-    { id: 10437, name: "Шары", active: false },
-    { id: 10413, name: "Хиты", img: fire, active: false },
-    { id: 10438, name: "Клубника", img: klub, active: false },
-    { id: 10439, name: "Сьедобные", img: fruit, active: false },
-    { id: 10409, name: "В коробке", active: false },
+    { id: 1014, name: "Цветы", active: false },
+    { id: 1, name: "Розы", img: roze, active: false },
+    { id: 2, name: "Микс букеты",  active: false },
+    { id: 3, name: "В коробке", active: false },
+    { id: 5, name: "Акции/Хиты", img: fire, active: false },
+    // { id: 10413, name: "Хиты", img: fire, active: false },
+    // { id: 0, name: "Акции", img: roze, active: false },
+    // { id: 10437, name: "Шары", active: false },
+    // { id: 10438, name: "Клубника", img: klub, active: false },
+    // { id: 10439, name: "Сьедобные", img: fruit, active: false },
   ],
   lookPrice: false,
 };

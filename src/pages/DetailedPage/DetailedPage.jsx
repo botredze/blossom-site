@@ -43,6 +43,7 @@ const DetailedPage = () => {
         );
     };
 
+    console.log(everyFlowers, 'everyFlowers')
     return (
         <div className="detailedPage">
             <div className="container">
@@ -58,7 +59,7 @@ const DetailedPage = () => {
                         <img
                             src={
                                 imgParse(everyFlowers?.foto)?.path
-                                    ? `http://operator.blossom.333.kg/${
+                                    ? `https://operator.blossom.333.kg/${
                                         imgParse(everyFlowers?.foto)?.path
                                     }`
                                     : altImg
@@ -77,7 +78,7 @@ const DetailedPage = () => {
                         </div>
                         <div className="sostav">
                             <p>Состав: </p>
-                            <span>{everyFlowers?.sostav}</span>
+                            <span>{everyFlowers?.product_comment}</span>
                         </div>
                         <div className="actionsBtn">
                             <button onClick={() => setLook(true)}>Купить в 1 клик</button>

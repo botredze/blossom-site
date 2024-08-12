@@ -55,7 +55,7 @@ const CardForSlider = ({ content }) => {
                     <img
                         src={
                             imgParse(content.foto)?.path
-                                ? `http://operator.blossom.333.kg/${
+                                ? `https://operator.blossom.333.kg/${
                                     imgParse(content.foto)?.path
                                 }`
                                 : noImg

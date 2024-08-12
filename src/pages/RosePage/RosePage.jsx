@@ -39,7 +39,7 @@ const RosePage = () => {
           </div>
           <div className="choiceFlowers"></div>
           <h4>Розы</h4>
-          <ul className="categoryType categoryTypeMore ">
+          <ul className="categoryType categoryTypeMore" style={{display: "none"}}>
             {typeRose?.map((i) => (
               <li key={i.id}>
                 <p>{i?.name}</p>

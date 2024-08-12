@@ -58,6 +58,10 @@ const SendDataOrder = () => {
     dispatch(changeZakaz({ ...zakaz, type_pay: type }));
   };
 
+  const clickMethodPay = (type) => {
+    dispatch(changeZakaz({ ...zakaz, method_pay: type }));
+  };
+
   return (
     <div className="sendData">
       <h5>Оформление заказа</h5>
@@ -108,14 +112,39 @@ const SendDataOrder = () => {
               <div>{zakaz?.type_pay === 2 && <img src={good} alt="" />}</div>
               <p>Картой</p>
             </div>
+            {zakaz?.type_pay ===2 &&
+                <>
+                  <div className='pay_method'>
+                    <h5>Выберите способ оплаты</h5>
+                    <div className="choice__inner" onClick={() => clickMethodPay(1)}>
+                      <div>{zakaz?.method_pay === 1 && <img src={good} alt=""/>}</div>
+                      <p>MBANK</p>
+                    </div>
+
+                    <div className="choice__inner" onClick={() => clickMethodPay(2)}>
+                      <div>{zakaz?.method_pay === 2 && <img src={good} alt=""/>}</div>
+                      <p>Эльсом</p>
+                    </div>
+
+                    <div className="choice__inner" onClick={() => clickMethodPay(3)}>
+                      <div>{zakaz?.method_pay === 3  && <img src={good} alt=""/>}</div>
+                      <p>Visa/Mastercard/Элкарт</p>
+                    </div>
+
+                    <div className="choice__inner" onClick={() => clickMethodPay(4)}>
+                      <div>{zakaz?.method_pay === 4 && <img src={good} alt=""/>}</div>
+                      <p>О! деньги</p>
+                    </div>
+                  </div>
+                </>}
           </div>
         </div>
         {one === 1 && (
-          <>
-            <label>
-              <b>Введите точный адрес</b>
-              <input
-                type="text"
+            <>
+              <label>
+                <b>Введите точный адрес</b>
+                <input
+                    type="text"
                 placeholder="Ваш адрес"
                 onChange={changeInput}
                 required

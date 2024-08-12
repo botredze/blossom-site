@@ -41,12 +41,16 @@ const Footer = () => {
             <p onClick={clickScroll}>Наверх</p>
             <div className="contacts">
               <p>{numWebSite}</p>
-              <div>
+              <div  className='soc_icons'>
+                <a className='links' href="https://www.instagram.com/blossom_kg" target="_blank" rel="nofollow">
                 <img src={inst} alt="inst" />
+                </a>
               </div>
-              <div>
+              <div className='soc_icons'>
+                <a  className='links' href="https://api.whatsapp.com/send/?phone=996700507505&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9C%D0%BE%D0%B6%D0%B5%D1%82%D0%B5+%D0%B4%D0%B0%D1%82%D1%8C+%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="nofollow">
                 <img src={wa} alt="W/A" />
-              </div>
+                </a>
+              </div >
             </div>
           </div>
         </div>

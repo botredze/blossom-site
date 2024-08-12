@@ -2,6 +2,7 @@ import React from "react";
 import "./CatalogPage.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getMenuItems,
   getRose,
   getTopCategory,
   getTopFlowers,
@@ -20,20 +21,24 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
   const arrImg = [hit, rose, pions, inKorobka, nam, tulpan, gipsofils];
 
-  const { listTopCategory, listRose, morelist } = useSelector(
+  const { listTopCategory, listRose, morelist, menuitems } = useSelector(
     (state) => state.requestSlice
   );
+
+  console.log(menuitems, 'menuitems')
 
   React.useEffect(() => {
     dispatch(getTopCategory());
     dispatch(getRose());
     dispatch(getTopFlowers());
+    dispatch(getMenuItems())
     window.scrollTo(0, 0);
   }, []);
 
   // console.log(listTopCategory, "listTopCategory");
   // console.log(listRose, "listRose");
 
+  console.log(listTopCategory, 'listTopCategory')
   return (
     <div className="catalogPage">
       <div className="container">
@@ -50,7 +55,7 @@ const CatalogPage = () => {
                 to={`/other/${i?.codeid}/${i?.category_name}`}
               >
                 <div className="flowersImg">
-                  <img src={arrImg[ind]} alt="" />
+                  <img src={i?.photoUrl} alt="Фото категории" />
                 </div>
                 <div className="actionsClick">
                   <i></i>

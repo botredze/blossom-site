@@ -28,6 +28,7 @@ const EveryCard = ({ content }) => {
     dispatch(changeFavorites(updatedFavorites));
   };
 
+  console.log(content, 'content')
   const addCard = (obj) => {
     dispatch(changeFavorites([...listfavorites, obj]));
   };
@@ -47,15 +48,17 @@ const EveryCard = ({ content }) => {
   const clickDetailed = () => {
     navigate(`/every/${content?.codeid}`);
   };
+  const finalPrice = content.product_percent > 0 ? content.posuda_price : content.product_price;
 
   return (
     <div className="everyCard">
       <div className="imgs">
         <div className="mainImg">
           <img
+          loading="lazy"
             src={
               imgParse(content.foto)?.path
-                ? `http://operator.blossom.333.kg/${
+                ? `https://operator.blossom.333.kg/${
                     imgParse(content.foto)?.path
                   }`
                 : noImg
@@ -90,7 +93,17 @@ const EveryCard = ({ content }) => {
           <span>
               {+content?.status === 0 ? "В наличии" : "нет в наличии"}
             </span>
-          <p>{content?.product_price} сом</p>
+          {content.product_percent > 0 ? (
+              <div className='price'>
+                <div className='discount-parcent'>
+                  <p className="discounted">{content.product_price} сом</p>
+                  <p>({content.product_percent}% скидка)</p>
+                </div>
+                <p className="final-price">{finalPrice} сом</p>
+              </div>
+          ) : (
+              <p className="final-price">{finalPrice} сом</p>
+          )}
         </div>
         <div className="actions">
           <button onClick={() => setLook(true)}>Купить</button>

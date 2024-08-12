@@ -6,7 +6,7 @@
   background: transparent;
   @media screen and (max-width: 600px ){
     position: static;
-    height: 498px;
+   // height: 498px;
   }
 
   @media screen and (max-width: 860px ){
@@ -17,7 +17,7 @@
   @media screen and (max-width: 480px ){
     width: 48%;
     min-width: 120px;
-    height: 498px;
+    height: auto;
   }
 
   .imgs {
@@ -25,9 +25,19 @@
     .mainImg {
       width: 100%;
       height: 298px;
+      @media screen and (max-width: 480px ){
+        width: 100%;
+        height: 248px;
+        object-fit: cover;
+      }
       img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        // @media screen and (max-width: 600px) {
+        //   width: 260;
+        //   height: ;
+        // }
       }
     }
     .heart {
@@ -53,7 +63,7 @@
   }
   .info {
     background: #f7f0eb;
-    padding: 13px 15px;
+    padding: 10px 13px;
     text-align: left;
     height: 180px;
     display: flex;
@@ -63,7 +73,7 @@
     .moreInfo {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
       h3 {
         color: #414141;
@@ -92,9 +102,9 @@
       }
       p {
         color: #414141;
-        font-size: 23px;
+       // font-size: 23px;
         line-height: normal;
-        padding: 5px 0 15px 0;
+       // padding: 5px 0 15px 0;
       }
     }
     .actions {
@@ -130,6 +140,41 @@
         }
       }
     }
+  }
+  .price{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0;
+    margin: 0 !important;
+
+    p {
+      color: red !important;
+    }
+  }
+
+  .discount-parcent{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    p{
+      color: #414141 !important;
+      font-size: 14px !important;
+      line-height: normal;
+    }
+  }
+
+  .discounted {
+    text-decoration: line-through;
+    padding: 0;
+    margin: 0 !important;
+  }
+
+  .final-price {
+    font-weight: bold;
+    padding: 0;
+    margin: 0 !important;
   }
 
   @media screen and (max-width: 860px ){
