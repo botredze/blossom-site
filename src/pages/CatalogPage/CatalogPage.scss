@@ -6,8 +6,7 @@
       gap: 20px;
       padding: 30px 0;
 
-
-      @media screen and (max-width: 950px ){
+      @media screen and (max-width: 950px) {
         flex-wrap: wrap;
       }
       a {
@@ -17,17 +16,17 @@
         background: #f9f9f9;
         border-radius: 5px;
         position: relative;
-        @media screen and (max-width: 600px ){
+        @media screen and (max-width: 600px) {
           width: 190px;
           height: 207px;
         }
 
-        @media screen and (max-width: 410px ){
+        @media screen and (max-width: 410px) {
           width: 175px;
           height: 192px;
         }
 
-        @media screen and (max-width: 360px ){
+        @media screen and (max-width: 360px) {
           width: 165px;
           height: 182px;
         }
@@ -35,7 +34,7 @@
         .flowersImg {
           width: 90%;
           margin: 0 auto;
-          height: 140px;
+          height: 150px;
         }
         .actionsClick {
           background: #fff;
@@ -59,7 +58,7 @@
             border-radius: 50%;
           }
           p {
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
             text-align: left;
             font-size: 16px;
             font-weight: 400;

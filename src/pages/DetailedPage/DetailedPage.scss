@@ -5,12 +5,13 @@
     gap: 30px;
     border-bottom: 1px solid #ebedea;
     .mainImgflowers {
-      min-width: 360px;
-      height: 440px;
+      min-width: 340px;
+      height: 380px;
       > img {
         width: 100%;
         height: 100%;
         transition: transform 0.3s ease;
+        border-radius: 10px;
       }
     }
     .mainContent {
@@ -114,7 +115,7 @@
     }
   }
 
-  @media screen and (max-width: 480px ){
+  @media screen and (max-width: 480px) {
     &__inner {
       display: flex;
       flex-direction: column;

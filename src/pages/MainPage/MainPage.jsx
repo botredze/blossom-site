@@ -37,20 +37,20 @@ const MainPage = () => {
           </div>
         </>
       )}
-      {listSweets?.length !== 0 && (
-        <>
-          <div className="mainList">
-            <div className="container">
-              <h3 className="title">Сладости</h3>
-              <div className="list">
-                {listSweets?.map((i) => (
-                  <EveryCard key={i.codeid} content={i} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+      {/*{listSweets?.length !== 0 && (*/}
+      {/*  <>*/}
+      {/*    <div className="mainList">*/}
+      {/*      <div className="container">*/}
+      {/*        <h3 className="title">Сладости</h3>*/}
+      {/*        <div className="list">*/}
+      {/*          {listSweets?.map((i) => (*/}
+      {/*            <EveryCard key={i.codeid} content={i} />*/}
+      {/*          ))}*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </>*/}
+      {/*)}*/}
     </>
   );
 };

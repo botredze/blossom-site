@@ -25,20 +25,20 @@ const CatalogPage = () => {
     (state) => state.requestSlice
   );
 
-  console.log(menuitems, 'menuitems')
+  console.log(menuitems, "menuitems");
 
   React.useEffect(() => {
     dispatch(getTopCategory());
     dispatch(getRose());
     dispatch(getTopFlowers());
-    dispatch(getMenuItems())
+    dispatch(getMenuItems());
     window.scrollTo(0, 0);
   }, []);
 
   // console.log(listTopCategory, "listTopCategory");
   // console.log(listRose, "listRose");
 
-  console.log(listTopCategory, 'listTopCategory')
+  console.log(listTopCategory, "listTopCategory");
   return (
     <div className="catalogPage">
       <div className="container">

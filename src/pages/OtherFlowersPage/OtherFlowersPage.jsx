@@ -14,12 +14,12 @@ const OtherFlowersPage = () => {
   const { id, name } = useParams();
   const { otherData } = useSelector((state) => state.requestSlice);
 
-  // console.log(id, name);
+   console.log(id, name);
   React.useEffect(() => {
     // window.location.reload();
     dispatch(getOtherData(id));
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
   // console.log(otherData, "otherData");
 
   return (

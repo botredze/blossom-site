@@ -18,12 +18,26 @@ const Menu = () => {
     <div className="menu">
       <div className="container">
         <div className="menu__inner">
-          <MenuContent/>
+          {/*<MenuContent/>*/}
+          <div className="main">
+            <div>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+            <p>МЕНЮ</p>
+          </div>
           <ul className="category">
             {listCategory.map((categ) => (
-              <li onClick={() => clickCategory(categ)} key={categ?.id}>
-                {categ?.name}
-              </li>
+                <li onClick={() => clickCategory(categ)} key={categ?.id}>
+                  {categ?.name}
+                </li>
             ))}
           </ul>
         </div>

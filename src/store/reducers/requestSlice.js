@@ -52,7 +52,7 @@ export const getToys = createAsyncThunk(
         try {
             const response = await axios({
                 method: "GET",
-                url: `${REACT_APP_API_URL}/api/main_prod?id=10412`,
+                url: `${REACT_APP_API_URL}/api/main_prod?id=4`,
             });
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
@@ -72,7 +72,7 @@ export const getSweets = createAsyncThunk(
         try {
             const response = await axios({
                 method: "GET",
-                url: `${REACT_APP_API_URL}/api/main_prod?id=10411`,
+                url: `${REACT_APP_API_URL}/api/main_prod?id=2`,
             });
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
@@ -92,7 +92,7 @@ export const getRose = createAsyncThunk(
         try {
             const response = await axios({
                 method: "GET",
-                url: `${REACT_APP_API_URL}/api/main_prod?id=10414`,
+                url: `${REACT_APP_API_URL}/api/main_prod?id=1`,
             });
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
@@ -112,7 +112,7 @@ export const getPions = createAsyncThunk(
         try {
             const response = await axios({
                 method: "GET",
-                url: `${REACT_APP_API_URL}/api/main_prod?id=10416`,
+                url: `${REACT_APP_API_URL}/api/main_prod?id=2`,
             });
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
@@ -129,10 +129,12 @@ export const getOtherData = createAsyncThunk(
     "getOtherData",
     async function (id, {dispatch, rejectWithValue}) {
         try {
+            console.log(id, 'id')
             const response = await axios({
                 method: "GET",
                 url: `${REACT_APP_API_URL}/api/more?id=${id}`,
             });
+            console.log(response, 'response')
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
             } else {
@@ -152,7 +154,7 @@ export const getRoseSort = createAsyncThunk(
             const response = await axios({
                 method: "GET",
                 // url: `${REACT_APP_API_URL}/api/rose?id=10414`,
-                url: `${REACT_APP_API_URL}/api/main_prod?id=10414`, /// временно
+                url: `${REACT_APP_API_URL}/api/main_prod?id=1`, /// временно
             });
             if (response.status >= 200 && response.status < 300) {
                 return response?.data?.recordset;
@@ -562,7 +564,7 @@ const requestSlice = createSlice({
         builder.addCase(getOrderHistory.rejected, (state, action) => {
             state.error = action.payload;
             state.preloader = false;
-            alert('Ошибка во время выполнения запроса, попробуйте позже')
+          //  alert('Ошибка во время выполнения запроса, попробуйте позже')
         });
         builder.addCase(getOrderHistory.pending, (state, action) => {
             state.preloader = true;
@@ -577,7 +579,7 @@ const requestSlice = createSlice({
         builder.addCase(getMenuItems.rejected, (state, action) => {
             state.error = action.payload;
             state.preloader = false;
-            alert('Ошибка во время выполнения запроса, попробуйте позже')
+            //alert('Ошибка во время выполнения запроса, попробуйте позже')
         });
         builder.addCase(getMenuItems.pending, (state, action) => {
             state.preloader = true;

@@ -28,7 +28,6 @@ const EveryCard = ({ content }) => {
     dispatch(changeFavorites(updatedFavorites));
   };
 
-  console.log(content, 'content')
   const addCard = (obj) => {
     dispatch(changeFavorites([...listfavorites, obj]));
   };
@@ -53,9 +52,10 @@ const EveryCard = ({ content }) => {
   return (
     <div className="everyCard">
       <div className="imgs">
-        <div className="mainImg">
+        <div className="mainImg" onClick={clickDetailed}>
           <img
           loading="lazy"
+          className="mainImg_image"
             src={
               imgParse(content.foto)?.path
                 ? `https://operator.blossom.333.kg/${
