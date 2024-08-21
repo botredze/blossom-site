@@ -28,8 +28,8 @@ const MainRoutes = () => {
           <Route path="/other/:id/:name" element={<OtherFlowersPage />} />
           <Route path="/favorite" element={<FavotitePage />} />
           <Route path="/basket" element={<BasketPage />} />
-          <Route path="/kabinet" element={<LichnyjKabinet/>}/>
-          <Route path='/personalAccount' element={<PersonalAccountPage/>}/>
+          <Route path="/kabinet" element={<LichnyjKabinet />} />
+          <Route path="/personalAccount" element={<PersonalAccountPage />} />
         </Route>
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>

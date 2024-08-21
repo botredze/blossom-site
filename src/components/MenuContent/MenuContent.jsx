@@ -1,226 +1,168 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMenuItems,
+  getRoseByFiltre,
+} from "../../store/reducers/requestSlice";
+import { FaChevronRight } from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
 import "./MenuContent.scss";
-import {useSelector} from "react-redux";
 
 const MenuContent = () => {
-    const [menuVisible, setMenuVisible] = useState(false);
-    const [activeCategory, setActiveCategory] = useState(null);
-    const [activeSubCategory, setActiveSubCategory] = useState(null);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubCategory, setActiveSubCategory] = useState(null);
+  const [localMenuItems, setLocalMenuItems] = useState([]);
+  const dispatch = useDispatch();
+  const menuRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const navigate = useNavigate();
 
-    const menuRef = useRef(null);
-    const menuButtonRef = useRef(null);
+  const { menuItems } = useSelector((state) => state.requestSlice);
+  const { filtreByCategory } = useSelector((state) => state.requestSlice);
 
-    //const {menuItems} = useSelector((state) => state.requestSlice)
+  useEffect(() => {
+    dispatch(getMenuItems())
+      .unwrap()
+      .then((data) => {
+        setLocalMenuItems(data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных меню:", error);
+      });
+  }, [dispatch]);
 
-    const menuItems = [
-        {
-            number_to_categorie: 1,
-            name: "Цветы",
-            categories: [
-                {
-                    codeid: "1",
-                    category_name: "Розы",
-                    status: 1,
-                    number_to_categorie: 1,
-                    establishments: [
-                        {
-                            codeid: "1",
-                            establishment_name: "Большие букеты",
-                            status: 0,
-                            code_category: "1",
-                            navLink: "/categ", /// пример
-                        },
-                        {
-                            codeid: "2",
-                            establishment_name: "101 роза",
-                            status: 0,
-                            code_category: "1",
-                            navLink: "/categ", /// пример
-                        },
-                    ],
-                },
-                {
-                    codeid: "5",
-                    category_name: "В коробке",
-                    status: 1,
-                    number_to_categorie: 1,
-                    establishments: [
-                        {
-                            codeid: "5",
-                            establishment_name: "1",
-                            status: 0,
-                            code_category: "5",
-                        },
-                        {
-                            codeid: "6",
-                            establishment_name: "2",
-                            status: 0,
-                            code_category: "5",
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            number_to_categorie: 5,
-            name: "Букеты",
-            categories: [
-                {
-                    codeid: "2",
-                    category_name: "Микс букеты",
-                    status: 1,
-                    number_to_categorie: 5,
-                    establishments: [
-                        {
-                            codeid: "3",
-                            establishment_name: "Большие",
-                            status: 0,
-                            code_category: "2",
-                        },
-                        {
-                            codeid: "4",
-                            establishment_name: "Small",
-                            status: 0,
-                            code_category: "2",
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            number_to_categorie: 11,
-            name: "Доп товары",
-            categories: [
-                {
-                    codeid: "3",
-                    category_name: "Фальга",
-                    status: 1,
-                    number_to_categorie: 11,
-                    establishments: [
-                        {
-                            codeid: "5",
-                            establishment_name: "1",
-                            status: 0,
-                            code_category: "5",
-                        },
-                        {
-                            codeid: "6",
-                            establishment_name: "2",
-                            status: 0,
-                            code_category: "5",
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            number_to_categorie: 12,
-            name: "Шары",
-            categories: [
-                {
-                    codeid: "4",
-                    category_name: "Сердечко)",
-                    status: 1,
-                    number_to_categorie: 12,
-                    establishments: [],
-                },
-            ],
-        },
-    ];
+  useEffect(() => {
+    if (filtreByCategory) {
+    }
+  }, [filtreByCategory]);
 
-    const handleClickOutside = (event) => {
-        if (
-            menuRef.current &&
-            !menuRef.current.contains(event.target) &&
-            !menuButtonRef.current.contains(event.target)
-        ) {
-            setMenuVisible(false);
-            setActiveCategory(null);
-            setActiveSubCategory(null);
-        }
+  const handleClickOutside = (event) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target) &&
+      !menuButtonRef.current.contains(event.target)
+    ) {
+      setMenuVisible(false);
+      setActiveCategory(null);
+      setActiveSubCategory(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
 
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+  const handleRedirect = (id, establishment_name) => {
+    dispatch(getRoseByFiltre(id))
+      .unwrap()
+      .then((data) => {
+        console.log("11", data);
+        navigate(`/other/${id}/${establishment_name}`);
+        setMenuVisible(false); // Close the menu after redirect
+        setActiveCategory(null);
+        setActiveSubCategory(null);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных:", error);
+      });
+  };
 
-    const click = (text) => {
-        alert(text);
-    };
+  return (
+    <div>
+      <div
+        className="menu"
+        onMouseEnter={() => setMenuVisible(true)}
+        ref={menuButtonRef}
+      >
+        <h2 className="menu-title">МЕНЮ</h2>
+      </div>
 
-    return (
-        <div>
-            <div
-                className="menu"
-                onMouseEnter={() => setMenuVisible(true)}
-                ref={menuButtonRef}
-            >
-                menu
-            </div>
-            {menuVisible && (
-                <ul className="TestParent" ref={menuRef}>
-                    <div className="first">
-                        {menuItems.map((i) => (
-                            <li
-                                key={i.number_to_categorie}
-                                onMouseEnter={() => setActiveCategory(i.number_to_categorie)}
-                                onClick={() => click(i?.name)}
-                            >
-                                {i.name}
-                            </li>
-                        ))}
-                    </div>
-                    <div className="second">
-                        {menuItems.map((i) => (
-                            <li
-                                key={i.number_to_categorie}
-                                className={
-                                    i.number_to_categorie === activeCategory ? "active" : ""
+      {menuVisible && (
+        <>
+          <div className="menu-overlay" onClick={() => setMenuVisible(false)} />
+          <ul className="menu-list" ref={menuRef}>
+            {localMenuItems.map((item) => (
+              <li
+                key={item.number_to_categorie}
+                onMouseEnter={() => setActiveCategory(item.number_to_categorie)}
+                onMouseLeave={() => {
+                  setActiveCategory(null);
+                  setActiveSubCategory(null);
+                }}
+                className="menu-item"
+              >
+                <Link
+                  className="nav-link"
+                  to={item.path}
+                  onClick={() => setMenuVisible(false)}
+                >
+                  {item.name}
+                </Link>
+                {item.categories && (
+                  <span className="arrow">
+                    <FaChevronRight />
+                  </span>
+                )}
+                {activeCategory === item.number_to_categorie && (
+                  <ul className="submenu-list">
+                    {item.categories?.map((category) => (
+                      <li
+                        key={category.codeid}
+                        onMouseEnter={() =>
+                          setActiveSubCategory(category.codeid)
+                        }
+                        onMouseLeave={() => setActiveSubCategory(null)}
+                        className="submenu-item"
+                      >
+                        <Link
+                          className="nav-link"
+                          to={category.path}
+                          onClick={() => {
+                            setActiveCategory(null);
+                            setActiveSubCategory(null);
+                            setMenuVisible(false);
+                          }}
+                        >
+                          {category.category_name}
+                        </Link>
+                        {category.establishments && (
+                          <span className="arrow">
+                            <FaChevronRight />
+                          </span>
+                        )}
+                        {activeSubCategory === category.codeid && (
+                          <ul className="sub-submenu-list">
+                            {category.establishments.map((establishment) => (
+                              <li
+                                key={establishment.codeid}
+                                className="sub-submenu-item"
+                                onClick={() =>
+                                  handleRedirect(
+                                    establishment.codeid,
+                                    establishment.establishment_name
+                                  )
                                 }
-                            >
-                                {i.number_to_categorie === activeCategory && (
-                                    <div>
-                                        {i.categories.map((j) => (
-                                            <div
-                                                key={j.codeid}
-                                                onMouseEnter={() => setActiveSubCategory(j.codeid)}
-                                                onClick={() => click(j.category_name)}
-                                            >
-                                                {j.category_name}
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </li>
-                        ))}
-                    </div>
-                    <div className="third">
-                        {menuItems
-                            .find((i) => i.number_to_categorie === activeCategory)
-                            ?.categories.map((j) =>
-                                j.codeid === activeSubCategory ? (
-                                    <li key={j.codeid} className="active">
-                                        <div>
-                                            {j.establishments.map((k) => (
-                                                <div
-                                                    key={k.codeid}
-                                                    onClick={() => click(k.establishment_name)}
-                                                >
-                                                    {k.establishment_name}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </li>
-                                ) : null
-                            )}
-                    </div>
-                </ul>
-            )}
-        </div>
-    );
+                              >
+                                {establishment.establishment_name}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
 };
 
-export default MenuContent
+export default MenuContent;

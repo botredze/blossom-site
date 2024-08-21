@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import "./Menu.scss";
 import { listCategory } from "../../helpers/dataArr";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,8 @@ const Menu = () => {
     <div className="menu">
       <div className="container">
         <div className="menu__inner">
-          {/*<MenuContent/>*/}
           <div className="main">
-            <div>
+            <div className="main-menu-link">
               <i></i>
               <i></i>
               <i></i>
@@ -31,13 +30,16 @@ const Menu = () => {
               <i></i>
               <i></i>
             </div>
-            <p>МЕНЮ</p>
+            {/* <p>МЕНЮ</p> */}
+            <div>
+              <MenuContent />
+            </div>
           </div>
           <ul className="category">
             {listCategory.map((categ) => (
-                <li onClick={() => clickCategory(categ)} key={categ?.id}>
-                  {categ?.name}
-                </li>
+              <li onClick={() => clickCategory(categ)} key={categ?.id}>
+                {categ?.name}
+              </li>
             ))}
           </ul>
         </div>
