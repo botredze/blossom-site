@@ -47,15 +47,16 @@ const EveryCard = ({ content }) => {
   const clickDetailed = () => {
     navigate(`/every/${content?.codeid}`);
   };
-  const finalPrice = content.product_percent > 0 ? content.posuda_price : content.product_price;
+  const finalPrice =
+    content.product_percent > 0 ? content.posuda_price : content.product_price;
 
   return (
     <div className="everyCard">
       <div className="imgs">
         <div className="mainImg" onClick={clickDetailed}>
           <img
-          loading="lazy"
-          className="mainImg_image"
+            loading="lazy"
+            className="mainImg_image"
             src={
               imgParse(content.foto)?.path
                 ? `https://operator.blossom.333.kg/${
@@ -90,19 +91,17 @@ const EveryCard = ({ content }) => {
               <b> / 0</b>
             </div>
           </div>
-          <span>
-              {+content?.status === 0 ? "В наличии" : "нет в наличии"}
-            </span>
+          <span>{+content?.status === 0 ? "В наличии" : "нет в наличии"}</span>
           {content.product_percent > 0 ? (
-              <div className='price'>
-                <div className='discount-parcent'>
-                  <p className="discounted">{content.product_price} сом</p>
-                  <p>({content.product_percent}% скидка)</p>
-                </div>
-                <p className="final-price">{finalPrice} сом</p>
+            <div className="price">
+              <div className="discount-parcent">
+                <p className="discounted">{content.product_price} сом</p>
+                <p>({content.product_percent}% скидка)</p>
               </div>
-          ) : (
               <p className="final-price">{finalPrice} сом</p>
+            </div>
+          ) : (
+            <p className="final-price">{finalPrice} сом</p>
           )}
         </div>
         <div className="actions">

@@ -56,13 +56,13 @@ const MenuContent = () => {
     };
   }, []);
 
-  const handleRedirect = (id, establishment_name) => {
+  const handleRedirect = (id, establishment_name, category_name) => {
     dispatch(getRoseByFiltre(id))
       .unwrap()
       .then((data) => {
         console.log("11", data);
         navigate(`/other/${id}/${establishment_name}`);
-        setMenuVisible(false); // Close the menu after redirect
+        setMenuVisible(false);
         setActiveCategory(null);
         setActiveSubCategory(null);
       })

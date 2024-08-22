@@ -1,10 +1,13 @@
 .menu {
+  background-color: #c14e77;
   .main {
-    background: #e9457e;
+    // background: #e9457e;
     padding: 25px 18px;
 
     .main-menu-link {
       margin-right: 20px;
+      position: sticky;
+      z-index: 2;
     }
   }
 
@@ -13,7 +16,6 @@
     padding: 0;
   }
 
-  background-color: #c14e77;
   &__inner {
     display: flex;
     align-items: center;
