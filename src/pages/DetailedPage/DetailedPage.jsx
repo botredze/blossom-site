@@ -29,14 +29,16 @@ const DetailedPage = () => {
   const { everyFlowers, listSweets, listToys } = useSelector(
     (state) => state.requestSlice
   );
-  //   const { otherData } = useSelector((state) => state.requestSlice);
+  const { otherData } = useSelector((state) => state.requestSlice);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getEveryData(id));
     dispatch(getSweets());
+    dispatch(getEveryData(id));
     dispatch(getOtherData(id));
   }, []);
+
+  console.log("СладостиЧХЧХЧХЧ", listSweets);
 
   const addCardBasket = () => {
     dispatch(addListBasket(everyFlowers));
@@ -100,40 +102,39 @@ const DetailedPage = () => {
             </div>
           </div>
         </div>
-
         <h3 className="title">Добавьте к букету</h3>
-        {/* <AddToSweets key={id} cards={listSweets} /> */}
+        <div className="cards">
+          <AddToSweets key={id} cards={listSweets} />
+        </div>
+        {/* {listToys?.length !== 0 && ( */}
+        {/* <> */}
+        {/* <div className="mainList"> */}
+        {/* <div className="container"> */}
+        {/* <h3 className="title">Мягкие игрушки</h3> */}
+        {/* <div className="list"> */}
+        {/* {listToys?.map((i) => ( */}
+        {/* <EveryCard key={i.codeid} content={i} /> */}
+        {/* ))} */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </> */}
+        {/* )} */}
 
-        {listToys?.length !== 0 && (
-          <>
-            <div className="mainList">
-              <div className="container">
-                {/* <h3 className="title">Мягкие игрушки</h3> */}
-                <div className="list">
-                  {listToys?.map((i) => (
-                    <EveryCard key={i.codeid} content={i} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {listSweets?.length !== 0 && (
-          <>
-            <div className="mainList">
-              <div className="container">
-                <h3 className="title">Сладости</h3>
-                <div className="list">
-                  {listSweets?.map((i) => (
-                    <EveryCard key={i.codeid} content={i} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
+        {/* {listSweets?.length !== 0 && ( */}
+        {/* <> */}
+        {/* <div className="mainList"> */}
+        {/* <div className="container"> */}
+        {/* <h3 className="title">Сладости</h3> */}
+        {/* <div className="list"> */}
+        {/* {listSweets?.map((i) => ( */}
+        {/* <EveryCard key={i.codeid} content={i} /> */}
+        {/* ))} */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </> */}
+        {/* )} */}
         <CallMe />
         {/* <VideoInfo /> */}
       </div>

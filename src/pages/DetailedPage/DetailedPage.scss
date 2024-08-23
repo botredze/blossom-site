@@ -114,6 +114,16 @@
       }
     }
   }
+  .title {
+    margin-top: 60px;
+    font-size: 40px;
+  }
+
+  .cards {
+    padding-top: 75px;
+    padding-bottom: 150px;
+    margin-bottom: 120px;
+  }
 
   @media screen and (max-width: 480px) {
     &__inner {

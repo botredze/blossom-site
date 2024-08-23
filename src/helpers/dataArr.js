@@ -4,7 +4,7 @@ export const listCategory = [
   { id: 10416, name: "Микс букеты", active: true, link: "/bukets" },
   { id: 213, name: "В коробке", active: true, link: "/other/3/В коробке" },
   { id: 124, name: "Шары", active: true, link: "/other/4/Шары" },
-  { id: 125, name: "Акции", active: true, link: "/other/5/Акции" },
+  { id: 125, name: "Акции", active: true, link: "/sales" },
   { id: 1273, name: "Доп товары", active: true, link: "/other/7/Доп товары" },
   { id: 8, name: "Контакты", active: true, link: "/contacts" },
 ];

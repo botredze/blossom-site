@@ -72,8 +72,10 @@ export const getSweets = createAsyncThunk(
     try {
       const response = await axios({
         method: "GET",
-        url: `${REACT_APP_API_URL}/api/main_prod?id=2`,
+        // url: `${REACT_APP_API_URL}/api/main_prod?id=2`,
+        url: `${REACT_APP_API_URL}/api/main_prod?id=7`,
       });
+      console.log(response);
       if (response.status >= 200 && response.status < 300) {
         return response?.data?.recordset;
       } else {
@@ -361,6 +363,27 @@ export const getMenuItems = createAsyncThunk(
   }
 );
 
+export const getBucketsDiscount = createAsyncThunk(
+  "discountBucket",
+  async function (_, { rejectWithValue }) {
+    try {
+      const response = await axios.get(
+        `${REACT_APP_API_URL}/api/get_discount_products`
+      );
+      console.log(response.data, "акции");
+
+      if (response.status === 200) {
+        return response.data; // возвращаем данные
+      } else {
+        throw new Error(`Error: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Ошибка при получении данных акции", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // фильтрация
 export const getBigBuckets = createAsyncThunk(
   "bigBuckets",
@@ -421,6 +444,7 @@ const initialState = {
   menuItems: [],
   bigBuckets: [],
   filtreByCategory: [],
+  discountBucket: [],
   token: "",
 
   zakaz: {
@@ -652,6 +676,19 @@ const requestSlice = createSlice({
       //alert('Ошибка во время выполнения запроса, попробуйте позже')
     });
     builder.addCase(getRoseByFiltre.pending, (state, action) => {
+      state.preloader = true;
+    });
+
+    builder.addCase(getBucketsDiscount.fulfilled, (state, action) => {
+      state.preloader = false;
+      state.discountBucket = action.payload;
+    });
+    builder.addCase(getBucketsDiscount.rejected, (state, action) => {
+      state.error = action.payload;
+      state.preloader = false;
+      //alert('Ошибка во время выполнения запроса, попробуйте позже')
+    });
+    builder.addCase(getBucketsDiscount.pending, (state, action) => {
       state.preloader = true;
     });
   },

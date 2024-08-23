@@ -1,7 +1,11 @@
 import React from "react";
 import { NavLink, useParams } from "react-router-dom";
 import "./OtherFlowersPage.scss";
-import { getOtherData } from "../../store/reducers/requestSlice";
+import {
+  getBucketsDicount,
+  getBucketsDiscount,
+  getOtherData,
+} from "../../store/reducers/requestSlice";
 import { useDispatch, useSelector } from "react-redux";
 import EveryCard from "../../components/EveryCard/EveryCard";
 import arrow from "../../assets/icons/arrowSort.svg";
@@ -12,15 +16,20 @@ import MoreInfo from "../../components/MoreInfo/MoreInfo";
 const OtherFlowersPage = () => {
   const dispatch = useDispatch();
   const { id, name } = useParams();
-  const { otherData } = useSelector((state) => state.requestSlice);
+  const { otherData, discountBucket } = useSelector(
+    (state) => state.requestSlice
+  );
 
   console.log(id, name);
   React.useEffect(() => {
     // window.location.reload();
     dispatch(getOtherData(id));
+    dispatch(getBucketsDiscount());
     window.scrollTo(0, 0);
   }, [id]);
-  // console.log(otherData, "otherData");
+  console.log(otherData, "otherData");
+
+  console.log(discountBucket); 
 
   return (
     <div className="rosePage">
@@ -45,6 +54,7 @@ const OtherFlowersPage = () => {
               </button>
             </div>
           </div>
+
           {otherData?.length === 0 ? (
             <p className="absent">Данные отсутствуют</p>
           ) : (

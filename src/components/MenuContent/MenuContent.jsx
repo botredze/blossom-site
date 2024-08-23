@@ -18,24 +18,82 @@ const MenuContent = () => {
   const menuButtonRef = useRef(null);
   const navigate = useNavigate();
 
-  const { menuItems } = useSelector((state) => state.requestSlice);
   const { filtreByCategory } = useSelector((state) => state.requestSlice);
 
   useEffect(() => {
     dispatch(getMenuItems())
       .unwrap()
       .then((data) => {
-        setLocalMenuItems(data);
+        const modifiedItems = data.map((item) => {
+          if (item.name === "ЦВЕТЫ") {
+            return {
+              ...item,
+              categories: item.categories.map((category) => {
+                if (category.category_name === "Розы") {
+                  return {
+                    ...category,
+                    establishments: category.establishments.filter(
+                      (est) => est.establishment_name !== "БОЛЬШИЕ"
+                    ),
+                  };
+                }
+                return category;
+              }),
+            };
+          }
+
+          if (item.name === "ДОП ТОВАРЫ") {
+            return {
+              ...item,
+              categories: item.categories.filter(
+                (category) => category.category_name === "КОНФЕТЫ"
+              ),
+            };
+          }
+
+          if (item.name === "БУКЕТЫ") {
+            return {
+              ...item,
+              categories: item.categories.filter((category) =>
+                ["МИКС БУКЕТЫ", "БОЛЬШИЕ"].includes(category.category_name)
+              ),
+            };
+          }
+
+          if (item.name === "ШАРЫ") {
+            return {
+              ...item,
+              categories: item.categories.map((category) => {
+                if (category.category_name === "СЕРДЕЧКО") {
+                  return {
+                    ...category,
+                    establishments: category.establishments.map((est) => {
+                      if (
+                        est.establishment_name === "СЕРДЕЧКО" ||
+                        est.establishment_name === "СЕРДЕЧКО)"
+                      ) {
+                        return {
+                          ...est,
+                          redirectTo: "/shary", // Добавляем одинаковый редирект для обеих подкатегорий
+                        };
+                      }
+                      return est;
+                    }),
+                  };
+                }
+                return category;
+              }),
+            };
+          }
+
+          return item;
+        });
+        setLocalMenuItems(modifiedItems);
       })
       .catch((error) => {
         console.error("Ошибка при получении данных меню:", error);
       });
   }, [dispatch]);
-
-  useEffect(() => {
-    if (filtreByCategory) {
-    }
-  }, [filtreByCategory]);
 
   const handleClickOutside = (event) => {
     if (
@@ -56,11 +114,19 @@ const MenuContent = () => {
     };
   }, []);
 
-  const handleRedirect = (id, establishment_name, category_name) => {
+  const handleRedirect = (id, establishment_name, redirectTo = null) => {
+    if (redirectTo) {
+      navigate(redirectTo);
+      setMenuVisible(false);
+      setActiveCategory(null);
+      setActiveSubCategory(null);
+      return;
+    }
+
     dispatch(getRoseByFiltre(id))
       .unwrap()
       .then((data) => {
-        console.log("11", data);
+        console.log("Data received:", data);
         navigate(`/other/${id}/${establishment_name}`);
         setMenuVisible(false);
         setActiveCategory(null);
@@ -69,6 +135,14 @@ const MenuContent = () => {
       .catch((error) => {
         console.error("Ошибка при получении данных:", error);
       });
+  };
+
+  const handleMenuClick = (item) => {
+    if (item.name === "ДОП ТОВАРЫ") {
+      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ"); // Замените "доп-товары-id" на реальный ID категории "ДОП ТОВАРЫ"
+    } else {
+      setMenuVisible(false);
+    }
   };
 
   return (
@@ -98,11 +172,11 @@ const MenuContent = () => {
                 <Link
                   className="nav-link"
                   to={item.path}
-                  onClick={() => setMenuVisible(false)}
+                  onClick={() => handleMenuClick(item)}
                 >
                   {item.name}
                 </Link>
-                {item.categories && (
+                {item.categories && item.categories.length > 0 && (
                   <span className="arrow">
                     <FaChevronRight />
                   </span>
@@ -122,9 +196,10 @@ const MenuContent = () => {
                           className="nav-link"
                           to={category.path}
                           onClick={() => {
-                            setActiveCategory(null);
-                            setActiveSubCategory(null);
-                            setMenuVisible(false);
+                            handleRedirect(
+                              category.codeid,
+                              category.category_name
+                            );
                           }}
                         >
                           {category.category_name}
@@ -143,7 +218,8 @@ const MenuContent = () => {
                                 onClick={() =>
                                   handleRedirect(
                                     establishment.codeid,
-                                    establishment.establishment_name
+                                    establishment.establishment_name,
+                                    establishment.redirectTo
                                   )
                                 }
                               >

@@ -13,6 +13,7 @@ import FavotitePage from "../pages/FavotitePage/FavotitePage";
 import BasketPage from "../pages/BasketPage/BasketPage";
 import LichnyjKabinet from "../pages/Lichnyj-kabinet/Lichnyj-kabinet";
 import PersonalAccountPage from "../pages/PersonalAccountPage/PersonalAccountPage";
+import Sales from "../pages/Sales/sales";
 
 const MainRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const MainRoutes = () => {
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/other/:id/:name" element={<OtherFlowersPage />} />
           <Route path="/favorite" element={<FavotitePage />} />
+          <Route path="/sales" element={<Sales />} />
           <Route path="/basket" element={<BasketPage />} />
           <Route path="/kabinet" element={<LichnyjKabinet />} />
           <Route path="/personalAccount" element={<PersonalAccountPage />} />
