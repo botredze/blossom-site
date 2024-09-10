@@ -21,10 +21,11 @@ const MenuContent = () => {
   const { filtreByCategory } = useSelector((state) => state.requestSlice);
 
   useEffect(() => {
-    dispatch(getMenuItems())
-      .unwrap()
-      .then((data) => {
-        const modifiedItems = data.map((item) => {
+    const fetchData = async () => {
+      try {
+        const data = await dispatch(getMenuItems()).unwrap();
+
+        const modifiedData = data.map((item) => {
           if (item.name === "ЦВЕТЫ") {
             return {
               ...item,
@@ -33,7 +34,7 @@ const MenuContent = () => {
                   return {
                     ...category,
                     establishments: category.establishments.filter(
-                      (est) => est.establishment_name !== "БОЛЬШИЕ"
+                      (est) => est.establishment_name !== "БОЛЬШИЕ БУКЕТЫ"
                     ),
                   };
                 }
@@ -42,20 +43,11 @@ const MenuContent = () => {
             };
           }
 
-          if (item.name === "ДОП ТОВАРЫ") {
+          if (item.name === "КОМНАТНЫЕ") {
             return {
               ...item,
               categories: item.categories.filter(
-                (category) => category.category_name === "КОНФЕТЫ"
-              ),
-            };
-          }
-
-          if (item.name === "БУКЕТЫ") {
-            return {
-              ...item,
-              categories: item.categories.filter((category) =>
-                ["МИКС БУКЕТЫ", "БОЛЬШИЕ"].includes(category.category_name)
+                (category) => category.category_name !== "В горшке"
               ),
             };
           }
@@ -67,18 +59,9 @@ const MenuContent = () => {
                 if (category.category_name === "СЕРДЕЧКО") {
                   return {
                     ...category,
-                    establishments: category.establishments.map((est) => {
-                      if (
-                        est.establishment_name === "СЕРДЕЧКО" ||
-                        est.establishment_name === "СЕРДЕЧКО)"
-                      ) {
-                        return {
-                          ...est,
-                          redirectTo: "/shary", // Добавляем одинаковый редирект для обеих подкатегорий
-                        };
-                      }
-                      return est;
-                    }),
+                    establishments: category.establishments.filter(
+                      (est) => est.establishment_name !== "СЕРДЕЧКО"
+                    ),
                   };
                 }
                 return category;
@@ -86,13 +69,25 @@ const MenuContent = () => {
             };
           }
 
+          if (item.name === "КОНФЕТЫ") {
+            return {
+              ...item,
+              categories: item.categories.filter(
+                (category) => category.category_name !== "ФАЛЬГА"
+              ),
+            };
+          }
+
           return item;
         });
-        setLocalMenuItems(modifiedItems);
-      })
-      .catch((error) => {
-        console.error("Ошибка при получении данных меню:", error);
-      });
+
+        setLocalMenuItems(modifiedData);
+      } catch (error) {
+        console.error("Ошибка при получении данных:", error);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   const handleClickOutside = (event) => {
@@ -139,7 +134,7 @@ const MenuContent = () => {
 
   const handleMenuClick = (item) => {
     if (item.name === "ДОП ТОВАРЫ") {
-      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ"); // Замените "доп-товары-id" на реальный ID категории "ДОП ТОВАРЫ"
+      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ");
     } else {
       setMenuVisible(false);
     }
@@ -214,7 +209,7 @@ const MenuContent = () => {
                             {category.establishments.map((establishment) => (
                               <li
                                 key={establishment.codeid}
-                                className="sub-submenu-item"
+                                // className="sub-submenu-item"
                                 onClick={() =>
                                   handleRedirect(
                                     establishment.codeid,
@@ -223,7 +218,7 @@ const MenuContent = () => {
                                   )
                                 }
                               >
-                                {establishment.establishment_name}
+                                {/* {establishment.establishment_name} */}
                               </li>
                             ))}
                           </ul>

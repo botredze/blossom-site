@@ -29,7 +29,7 @@ const OtherFlowersPage = () => {
   }, [id]);
   console.log(otherData, "otherData");
 
-  console.log(discountBucket); 
+  console.log(discountBucket);
 
   return (
     <div className="rosePage">

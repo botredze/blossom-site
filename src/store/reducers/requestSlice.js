@@ -322,6 +322,28 @@ export const register = createAsyncThunk(
   }
 );
 
+// для заявок
+export const createApplications = createAsyncThunk(
+  "application/createApplications",
+  async function (data, { rejectWithValue }) {
+    try {
+      const response = await axios.post(`${REACT_APP_API_URL}/api/create_zayavka`, data);
+      
+      if (response.status === 200) {
+        console.log("Заявка отправлена");
+        return response.data;
+      } else if (response.status === 409) {
+        console.log("ошибка");
+        return rejectWithValue('Ошибка: Дублирование данных'); 
+      } else {
+        throw new Error(`Ошибка: ${response.status}`);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message); 
+    }
+  }
+);
+
 export const getOrderHistory = createAsyncThunk(
   "get_order_history",
   async function (data, { dispatch, rejectWithValue }) {
@@ -448,6 +470,7 @@ const initialState = {
   token: "",
 
   zakaz: {
+    application: "",
     zakaz_summ: 0,
     zakaz_comment: "",
     client_fio: "",
@@ -689,6 +712,20 @@ const requestSlice = createSlice({
       //alert('Ошибка во время выполнения запроса, попробуйте позже')
     });
     builder.addCase(getBucketsDiscount.pending, (state, action) => {
+      state.preloader = true;
+    });
+
+
+    builder.addCase(createApplications.fulfilled, (state, action) => {
+      state.preloader = false;
+      state.application = action.payload;
+    });
+    builder.addCase(createApplications.rejected, (state, action) => {
+      state.error = action.payload;
+      state.preloader = false;
+      //alert('Ошибка во время выполнения запроса, попробуйте позже')
+    });
+    builder.addCase(createApplications.pending, (state, action) => {
       state.preloader = true;
     });
   },
