@@ -21,11 +21,10 @@ const MenuContent = () => {
   const { filtreByCategory } = useSelector((state) => state.requestSlice);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await dispatch(getMenuItems()).unwrap();
-
-        const modifiedData = data.map((item) => {
+    dispatch(getMenuItems())
+      .unwrap()
+      .then((data) => {
+        const modifiedItems = data.map((item) => {
           if (item.name === "ЦВЕТЫ") {
             return {
               ...item,
@@ -34,20 +33,30 @@ const MenuContent = () => {
                   return {
                     ...category,
                     establishments: category.establishments.filter(
-                      (est) => est.establishment_name !== "БОЛЬШИЕ БУКЕТЫ"
+                      (est) => est.establishment_name !== "БОЛЬШИЕ"
                     ),
                   };
                 }
+                console.log(category);
                 return category;
               }),
             };
           }
 
-          if (item.name === "КОМНАТНЫЕ") {
+          if (item.name === "ДОП ТОВАРЫ") {
             return {
               ...item,
               categories: item.categories.filter(
-                (category) => category.category_name !== "В горшке"
+                (category) => category.category_name === "КОНФЕТЫ"
+              ),
+            };
+          }
+
+          if (item.name === "БУКЕТЫ") {
+            return {
+              ...item,
+              categories: item.categories.filter((category) =>
+                ["МИКС БУКЕТЫ", "БОЛЬШИЕ"].includes(category.category_name)
               ),
             };
           }
@@ -59,9 +68,18 @@ const MenuContent = () => {
                 if (category.category_name === "СЕРДЕЧКО") {
                   return {
                     ...category,
-                    establishments: category.establishments.filter(
-                      (est) => est.establishment_name !== "СЕРДЕЧКО"
-                    ),
+                    establishments: category.establishments.map((est) => {
+                      if (
+                        est.establishment_name === "СЕРДЕЧКО" ||
+                        est.establishment_name === "СЕРДЕЧКО)"
+                      ) {
+                        return {
+                          ...est,
+                          redirectTo: "/shary",
+                        };
+                      }
+                      return est;
+                    }),
                   };
                 }
                 return category;
@@ -69,25 +87,13 @@ const MenuContent = () => {
             };
           }
 
-          if (item.name === "КОНФЕТЫ") {
-            return {
-              ...item,
-              categories: item.categories.filter(
-                (category) => category.category_name !== "ФАЛЬГА"
-              ),
-            };
-          }
-
           return item;
         });
-
-        setLocalMenuItems(modifiedData);
-      } catch (error) {
-        console.error("Ошибка при получении данных:", error);
-      }
-    };
-
-    fetchData();
+        setLocalMenuItems(modifiedItems);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных меню:", error);
+      });
   }, [dispatch]);
 
   const handleClickOutside = (event) => {
@@ -134,7 +140,7 @@ const MenuContent = () => {
 
   const handleMenuClick = (item) => {
     if (item.name === "ДОП ТОВАРЫ") {
-      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ");
+      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ"); 
     } else {
       setMenuVisible(false);
     }
@@ -206,21 +212,41 @@ const MenuContent = () => {
                         )}
                         {activeSubCategory === category.codeid && (
                           <ul className="sub-submenu-list">
-                            {category.establishments.map((establishment) => (
-                              <li
-                                key={establishment.codeid}
-                                // className="sub-submenu-item"
-                                onClick={() =>
-                                  handleRedirect(
-                                    establishment.codeid,
-                                    establishment.establishment_name,
-                                    establishment.redirectTo
-                                  )
-                                }
-                              >
-                                {/* {establishment.establishment_name} */}
-                              </li>
-                            ))}
+                            {category.establishments.map((establishment) => {
+                              if (establishment.establishment_name === "Сердечко") {
+                              
+                                return (
+                                  <div
+                                    key={establishment.codeid}
+                                    className="direct-content"
+                                    onClick={() =>
+                                      handleRedirect(
+                                        establishment.codeid,
+                                        establishment.establishment_name,
+                                        establishment.redirectTo
+                                      )
+                                    }
+                                  >
+                                    {/* {establishment.establishment_name} */}
+                                  </div>
+                                );
+                              }
+                              return (
+                                <li
+                                  key={establishment.codeid}
+                                  className="sub-submenu-item"
+                                  onClick={() =>
+                                    handleRedirect(
+                                      establishment.codeid,
+                                      establishment.establishment_name,
+                                      establishment.redirectTo
+                                    )
+                                  }
+                                >
+                                  {establishment.establishment_name}
+                                </li>
+                              );
+                            })}
                           </ul>
                         )}
                       </li>

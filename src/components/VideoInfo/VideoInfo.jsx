@@ -31,7 +31,6 @@ const VideoInfo = () => {
     setFormError('');
     dispatch(createApplications(formData))
       .then(() => {
-        // Показываем модальное окно при успешной отправке
         dispatch(changeAlertText({
           text: "Ваша заявка была принята, с вами свяжется оператор для уточнения дополнительной информации.",
           backColor: "#c14e77",
@@ -42,8 +41,6 @@ const VideoInfo = () => {
       .catch((error) => {
         console.error('Ошибка при отправке заявки:', error);
       });
-
-
   };
 
   return (
@@ -80,7 +77,7 @@ const VideoInfo = () => {
             <div className="manager">
               <div>
                 <img src={imgManager} alt="Manager" />
-              </div>
+              </div>  
               <p>Менеджер перезвонит вам, чтобы уточнить удобное время</p>
             </div>
           </div>
