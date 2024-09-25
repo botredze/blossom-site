@@ -274,7 +274,7 @@ export const createFastZakaz = createAsyncThunk(
 );
 export const login = createAsyncThunk(
   "login",
-  async function (data, navigate, { dispatch, rejectWithValue }) {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios({
         method: "POST",
@@ -283,10 +283,12 @@ export const login = createAsyncThunk(
       });
 
       if (response.status === 200) {
-        navigate("/personalAccount");
         dispatch(setToken(response?.data?.token));
+        console.log(response.data, "xz");
+
+        return response.data;
       } else {
-        throw Error(`Error: ${response.status}`);
+        throw new Error(`Ошибка: ${response.status}`);
       }
     } catch (error) {
       return rejectWithValue(error.message);
@@ -327,19 +329,22 @@ export const createApplications = createAsyncThunk(
   "application/createApplications",
   async function (data, { rejectWithValue }) {
     try {
-      const response = await axios.post(`${REACT_APP_API_URL}/api/create_zayavka`, data);
-      
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/create_zayavka`,
+        data
+      );
+
       if (response.status === 200) {
         console.log("Заявка отправлена");
         return response.data;
       } else if (response.status === 409) {
         console.log("ошибка");
-        return rejectWithValue('Ошибка: Дублирование данных'); 
+        return rejectWithValue("Ошибка: Дублирование данных");
       } else {
         throw new Error(`Ошибка: ${response.status}`);
       }
     } catch (error) {
-      return rejectWithValue(error.message); 
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -378,6 +383,28 @@ export const getMenuItems = createAsyncThunk(
         return response.data;
       } else {
         return rejectWithValue(`Error: ${response.status}`);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getProfile = createAsyncThunk(
+  "getProfile",
+  async function (codeid, { rejectWithValue }) {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: `https://blossomflowers.kg/api/profile_data?userId=${codeid}`,
+      });
+
+      console.log(response.data);
+      if (response.status === 200) {
+        return response.data;
+      } else if (response.status === 201) {
+        console.log("Страница профиля не найдена");
+      } else {
+        throw Error(`Error: ${response.status}`);
       }
     } catch (error) {
       return rejectWithValue(error.message);
@@ -468,6 +495,8 @@ const initialState = {
   filtreByCategory: [],
   discountBucket: [],
   token: "",
+  login: "",
+  getProfile: {},
 
   zakaz: {
     application: "",
@@ -509,6 +538,18 @@ const requestSlice = createSlice({
       state.preloader = false;
     });
     builder.addCase(getSortData.pending, (state, action) => {
+      state.preloader = true;
+    });
+    //////////////// profle
+    builder.addCase(getProfile.fulfilled, (state, action) => {
+      state.preloader = false;
+      state.getProfile = action.payload;
+    });
+    builder.addCase(getProfile.rejected, (state, action) => {
+      state.error = action.payload;
+      state.preloader = false;
+    });
+    builder.addCase(getProfile.pending, (state, action) => {
       state.preloader = true;
     });
     //////////////// getToys
@@ -714,7 +755,6 @@ const requestSlice = createSlice({
     builder.addCase(getBucketsDiscount.pending, (state, action) => {
       state.preloader = true;
     });
-
 
     builder.addCase(createApplications.fulfilled, (state, action) => {
       state.preloader = false;

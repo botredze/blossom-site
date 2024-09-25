@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getProfile } from "./requestSlice";
 
 const initialState = {
   loadingAuth: false,
@@ -35,10 +36,24 @@ const initialState = {
 
 const authSlice = createSlice({
   name: "authSlice",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {},
+  initialState: { codeid: null, token: null, profileData: null },
+  reducers: {
+    loginSuccess: (state, action) => {
+      state.codeid = action.payload.codeid;
+      state.token = action.payload.token;
+    },
+    logout: (state) => {
+      state.codeid = null;
+      state.token = null;
+      state.profileData = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getProfile.fulfilled, (state, action) => {
+      state.profileData = action.payload;
+    });
+  },
 });
-export const {} = authSlice.actions;
+export const { loginSuccess, logout } = authSlice.actions;
 
 export default authSlice.reducer;

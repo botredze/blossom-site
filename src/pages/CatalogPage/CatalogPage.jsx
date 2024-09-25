@@ -55,7 +55,7 @@ const CatalogPage = () => {
                 to={`/other/${i?.codeid}/${i?.category_name}`}
               >
                 <div className="flowersImg">
-                  <img src={i?.photoUrl} alt="Фото категории" />
+                  <img src={i?.photoUrl} alt="Фото категории" className="flower-card-img" />
                 </div>
                 <div className="actionsClick">
                   <i></i>
