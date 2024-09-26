@@ -31,16 +31,66 @@
           height: 182px;
         }
 
-        .flowersImg {
-          width: auto;
-          margin: 0 auto;
+        .mainCard-flowersImg {
+          position: relative;
+          width: 100%;
           height: 183px;
-          object-fit: cover;
+          overflow: hidden;
+        }
+
+        .flowersImg {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          transition: transform 0.3s ease;
         }
 
         .flower-card-img {
           border-radius: 10px;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+        }
+
+        .mainCard-flowersImg:hover .flowersImg {
+          transform: scale(1.1);
+        }
+
+        .actions {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.384);
+          color: #fff;
+          opacity: 0;
+          transition: opacity 0.4s ease-in-out;
+        }
+
+        .mainCard-flowersImg:hover .actions {
+          opacity: 1;
+        }
+
+        .action-icon {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 5px;
+          color: #fff;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        .actions p {
+          font-size: 18px;
+          margin: 0;
+          color: #fff;
         }
 
         .actionsClick {

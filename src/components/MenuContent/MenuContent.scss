@@ -8,10 +8,12 @@
   // z-index: 50;
 }
 
-.menu-item:nth-child(1) .submenu-list .submenu-item:nth-child(1) .sub-submenu-item:nth-child(1) {
+.menu-item:nth-child(1)
+  .submenu-list
+  .submenu-item:nth-child(1)
+  .sub-submenu-item:nth-child(1) {
   display: none;
 }
-
 
 .menu {
   position: relative;

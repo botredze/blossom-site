@@ -54,12 +54,20 @@ const CatalogPage = () => {
                 key={i?.codeid}
                 to={`/other/${i?.codeid}/${i?.category_name}`}
               >
-                <div className="flowersImg">
-                  <img src={i?.photoUrl} alt="Фото категории" className="flower-card-img" />
-                </div>
-                <div className="actionsClick">
-                  <i></i>
-                  <p>{i?.category_name}</p>
+                <div className="mainCard-flowersImg">
+                  <div className="flowersImg">
+                    <img
+                      src={i?.photoUrl}
+                      alt={i?.category_name || "Фото категории"}
+                      className="flower-card-img"
+                    />
+                  </div>
+                  <div className="actions">
+                    <button className="action-icon">
+                      <i className="icon-class"></i>
+                    </button>
+                    <p>{i?.category_name}</p>
+                  </div>
                 </div>
               </NavLink>
             ))}
@@ -74,6 +82,7 @@ const CatalogPage = () => {
               </div>
             </div>
           )}
+
           {/* <h3 className="title">Розы</h3>
           <div className="topCategory">
             {listRose?.map((i, ind) => (

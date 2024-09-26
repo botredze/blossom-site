@@ -24,72 +24,7 @@ const MenuContent = () => {
     dispatch(getMenuItems())
       .unwrap()
       .then((data) => {
-        const modifiedItems = data.map((item) => {
-          if (item.name === "ЦВЕТЫ") {
-            return {
-              ...item,
-              categories: item.categories.map((category) => {
-                if (category.category_name === "Розы") {
-                  return {
-                    ...category,
-                    establishments: category.establishments.filter(
-                      (est) => est.establishment_name !== "БОЛЬШИЕ"
-                    ),
-                  };
-                }
-                console.log(category);
-                return category;
-              }),
-            };
-          }
-
-          if (item.name === "ДОП ТОВАРЫ") {
-            return {
-              ...item,
-              categories: item.categories.filter(
-                (category) => category.category_name === "КОНФЕТЫ"
-              ),
-            };
-          }
-
-          if (item.name === "БУКЕТЫ") {
-            return {
-              ...item,
-              categories: item.categories.filter((category) =>
-                ["МИКС БУКЕТЫ", "БОЛЬШИЕ"].includes(category.category_name)
-              ),
-            };
-          }
-
-          if (item.name === "ШАРЫ") {
-            return {
-              ...item,
-              categories: item.categories.map((category) => {
-                if (category.category_name === "СЕРДЕЧКО") {
-                  return {
-                    ...category,
-                    establishments: category.establishments.map((est) => {
-                      if (
-                        est.establishment_name === "СЕРДЕЧКО" ||
-                        est.establishment_name === "СЕРДЕЧКО)"
-                      ) {
-                        return {
-                          ...est,
-                          redirectTo: "/shary",
-                        };
-                      }
-                      return est;
-                    }),
-                  };
-                }
-                return category;
-              }),
-            };
-          }
-
-          return item;
-        });
-        setLocalMenuItems(modifiedItems);
+        setLocalMenuItems(data);
       })
       .catch((error) => {
         console.error("Ошибка при получении данных меню:", error);
@@ -126,8 +61,7 @@ const MenuContent = () => {
 
     dispatch(getRoseByFiltre(id))
       .unwrap()
-      .then((data) => {
-        console.log("Data received:", data);
+      .then(() => {
         navigate(`/other/${id}/${establishment_name}`);
         setMenuVisible(false);
         setActiveCategory(null);
@@ -136,14 +70,6 @@ const MenuContent = () => {
       .catch((error) => {
         console.error("Ошибка при получении данных:", error);
       });
-  };
-
-  const handleMenuClick = (item) => {
-    if (item.name === "ДОП ТОВАРЫ") {
-      handleRedirect("доп-товары-id", "ДОП ТОВАРЫ"); 
-    } else {
-      setMenuVisible(false);
-    }
   };
 
   return (
@@ -173,7 +99,7 @@ const MenuContent = () => {
                 <Link
                   className="nav-link"
                   to={item.path}
-                  onClick={() => handleMenuClick(item)}
+                  onClick={() => setMenuVisible(false)}
                 >
                   {item.name}
                 </Link>
@@ -196,12 +122,12 @@ const MenuContent = () => {
                         <Link
                           className="nav-link"
                           to={category.path}
-                          onClick={() => {
+                          onClick={() =>
                             handleRedirect(
                               category.codeid,
                               category.category_name
-                            );
-                          }}
+                            )
+                          }
                         >
                           {category.category_name}
                         </Link>
@@ -212,41 +138,21 @@ const MenuContent = () => {
                         )}
                         {activeSubCategory === category.codeid && (
                           <ul className="sub-submenu-list">
-                            {category.establishments.map((establishment) => {
-                              if (establishment.establishment_name === "Сердечко") {
-                              
-                                return (
-                                  <div
-                                    key={establishment.codeid}
-                                    className="direct-content"
-                                    onClick={() =>
-                                      handleRedirect(
-                                        establishment.codeid,
-                                        establishment.establishment_name,
-                                        establishment.redirectTo
-                                      )
-                                    }
-                                  >
-                                    {/* {establishment.establishment_name} */}
-                                  </div>
-                                );
-                              }
-                              return (
-                                <li
-                                  key={establishment.codeid}
-                                  className="sub-submenu-item"
-                                  onClick={() =>
-                                    handleRedirect(
-                                      establishment.codeid,
-                                      establishment.establishment_name,
-                                      establishment.redirectTo
-                                    )
-                                  }
-                                >
-                                  {establishment.establishment_name}
-                                </li>
-                              );
-                            })}
+                            {category.establishments.map((establishment) => (
+                              <li
+                                key={establishment.codeid}
+                                className="sub-submenu-item"
+                                onClick={() =>
+                                  handleRedirect(
+                                    establishment.codeid,
+                                    establishment.establishment_name,
+                                    establishment.redirectTo
+                                  )
+                                }
+                              >
+                                {establishment.establishment_name}
+                              </li>
+                            ))}
                           </ul>
                         )}
                       </li>
