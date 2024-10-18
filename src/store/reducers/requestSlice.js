@@ -352,6 +352,12 @@ export const createApplications = createAsyncThunk(
 export const getOrderHistory = createAsyncThunk(
   "get_order_history",
   async function (data, { dispatch, rejectWithValue }) {
+    if (!data.codeid) {
+      return rejectWithValue("codeid необходим!");
+    }
+
+    console.log("Переданный codeid:", data.codeid);
+
     console.log(data);
 
     try {
@@ -360,8 +366,12 @@ export const getOrderHistory = createAsyncThunk(
         url: `${REACT_APP_API_URL}/api/get_zakaz_history?id=${data?.codeid}`,
       });
 
+      console.log("Статус ответа:", response.status);
+      console.log("Данные ответа:", response.data);
+
       console.log(response);
       if (response.status === 200) {
+        return response.data;
       } else if (response.status === 201) {
         console.log("История пользователя не найдена");
       } else {
@@ -497,6 +507,7 @@ const initialState = {
   token: "",
   login: "",
   getProfile: {},
+  get_order_history: [],
 
   zakaz: {
     application: "",
@@ -692,7 +703,8 @@ const requestSlice = createSlice({
     //get_order_history
     builder.addCase(getOrderHistory.fulfilled, (state, action) => {
       state.preloader = false;
-      window.location.reload();
+      // window.location.reload();
+      state.get_order_history = action.payload || [];
     });
     builder.addCase(getOrderHistory.rejected, (state, action) => {
       state.error = action.payload;
@@ -703,7 +715,6 @@ const requestSlice = createSlice({
       state.preloader = true;
     });
 
-    //get_order_history
     builder.addCase(getMenuItems.fulfilled, (state, action) => {
       state.preloader = false;
       state.menuItems = action.payload;

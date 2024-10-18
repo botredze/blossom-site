@@ -136,7 +136,7 @@ const MenuContent = () => {
                             <FaChevronRight />
                           </span>
                         )}
-                        {activeSubCategory === category.codeid && (
+                        {/* {activeSubCategory === category.codeid && (
                           <ul className="sub-submenu-list">
                             {category.establishments.map((establishment) => (
                               <li
@@ -154,7 +154,7 @@ const MenuContent = () => {
                               </li>
                             ))}
                           </ul>
-                        )}
+                        )} */}
                       </li>
                     ))}
                   </ul>

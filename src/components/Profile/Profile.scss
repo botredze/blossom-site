@@ -57,3 +57,39 @@
     }
   }
 }
+
+.modal-footer {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.confirm-logout {
+  color: #c14e77;
+  font-size: 18px;
+  padding: 10px 30px;
+  background: transparent;
+  border-radius: 10px;
+  border: solid 1px #c14e77;
+  transition: 0.4s all;
+
+  &:hover {
+    background: #c14e77;
+    color: #fff;
+  }
+}
+.cancel-logout {
+  color: #c14e77;
+  font-size: 18px;
+  padding: 10px 30px;
+  background: transparent;
+  border-radius: 10px;
+  border: solid 1px #c14e77;
+  transition: 0.4s all;
+
+  &:hover {
+    background: #c14e77;
+    color: #fff;
+  }
+}

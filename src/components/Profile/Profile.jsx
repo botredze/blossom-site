@@ -1,22 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Profile.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getProfile } from "../../store/reducers/requestSlice";
+import Modal from "../../Ui/Modal/Modal";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const codeid = useSelector((state) => state.authSlice.codeid);
   const profileData = useSelector((state) => state.authSlice.profileData);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const naviage = useNavigate();
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const handleLogout = () => {
+    console.log("Logout");
+    // Здесь вы можете добавить логику для выхода, например, очистку токена
+    closeModal();
+  };
+
+  const confirmLogout = () => {
+    naviage("/");
+    console.log("Пользователь вышел");
+
+    handleLogout();
+  };
 
   useEffect(() => {
     if (codeid) {
       dispatch(getProfile(codeid));
     }
   }, [codeid, dispatch]);
-
-  const handleLogout = () => {
-    console.log("Logout");
-  };
 
   return (
     <div className="wrapper_profile">
@@ -39,7 +61,7 @@ const Profile = () => {
                   <p className="item_desc">{profileData.client_phone}</p>
                 </div>
                 <div className="item">
-                  <label>Адресс: </label>
+                  <label>Адрес: </label>
                   <p className="item_desc">{profileData.client_address}</p>
                 </div>
               </div>
@@ -49,9 +71,27 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <button className="logout" onClick={handleLogout}>
+      <button className="logout" onClick={openModal}>
         Выйти
       </button>
+
+      <Modal
+        isVisible={modalIsOpen}
+        onClose={closeModal}
+        text="Вы уверены, что хотите выйти?"
+        backColor="#fff"
+        textColor="#000"
+        className="modal"
+      >
+        <div className="modal-footer">
+          <button className="confirm-logout" onClick={confirmLogout}>
+            Да
+          </button>
+          <button className="cancel-logout" onClick={closeModal}>
+            Нет
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

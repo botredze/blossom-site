@@ -8,12 +8,18 @@
   // z-index: 50;
 }
 
-.menu-item:nth-child(1)
-  .submenu-list
-  .submenu-item:nth-child(1)
-  .sub-submenu-item:nth-child(1) {
-  display: none;
-}
+// .menu-item:nth-child(1)
+//   .submenu-list
+//   .submenu-item:nth-child(1)
+//   .sub-submenu-item:nth-child(1) {
+//   display: none;
+// }
+// .menu-item:nth-child(4)
+//   .submenu-list
+//   .submenu-item:nth-child(4)
+//   .sub-submenu-item:nth-child(4) {
+//   display: none;
+// }
 
 .menu {
   position: relative;
