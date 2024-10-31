@@ -98,7 +98,7 @@ button {
     transform: rotate(200deg);
     top: 20%;
 
-    @media screen and (max-width: 780px ){
+    @media screen and (max-width: 780px) {
       display: none;
     }
   }
@@ -128,7 +128,7 @@ button {
   display: flex;
   align-items: center;
 
-  @media screen and (max-width: 600px ){
+  @media screen and (max-width: 600px) {
     margin: 0;
   }
 
@@ -147,4 +147,3 @@ button {
     }
   }
 }
-
