@@ -52,7 +52,7 @@ const CatalogPage = () => {
             {listTopCategory?.map((i, ind) => (
               <NavLink
                 key={i?.codeid}
-                to={`/other/${i?.codeid}/${i?.category_name}`}
+                to={`/other/${i?.codeid == 3 ? 5 : i?.codeid}/${i?.category_name}`}
               >
                 <div className="mainCard-flowersImg">
                   <div className="flowersImg">

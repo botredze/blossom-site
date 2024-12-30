@@ -72,6 +72,23 @@ const MenuContent = () => {
       });
   };
 
+  
+
+  const handleCLickCategory  = ( category ) => { 
+    
+    dispatch(getRoseByFiltre(category?.id))
+    .unwrap()
+    .then(() => {
+      navigate(`/other/${category?.id}/${category?.name}`);
+      setMenuVisible(false);
+      setActiveCategory(null);
+      setActiveSubCategory(null);
+    })
+    .catch((error) => {
+      console.error("Ошибка при получении данных:", error);
+    });
+  }
+
   return (
     <div>
       <div
@@ -99,7 +116,7 @@ const MenuContent = () => {
                 <Link
                   className="nav-link"
                   to={item.path}
-                  onClick={() => setMenuVisible(false)}
+                  onClick={() => handleCLickCategory(item)}
                 >
                   {item.name}
                 </Link>
